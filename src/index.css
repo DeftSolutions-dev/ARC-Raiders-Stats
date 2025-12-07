@@ -1,0 +1,545 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 20% 4%;
+    --foreground: 0 0% 95%;
+
+    --card: 220 20% 6%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 220 20% 6%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 142 70% 45%;
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 270 60% 50%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 220 15% 12%;
+    --muted-foreground: 220 10% 55%;
+
+    --accent: 45 90% 50%;
+    --accent-foreground: 0 0% 0%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 220 15% 15%;
+    --input: 220 15% 10%;
+    --ring: 142 70% 45%;
+
+    --radius: 0.25rem;
+
+    --chart-1: 142 70% 45%;
+    --chart-2: 270 60% 50%;
+    --chart-3: 45 90% 50%;
+    --chart-4: 200 70% 50%;
+    --chart-5: 0 70% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  code, .font-mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+  }
+}
+
+@layer components {
+  .stat-card {
+    @apply bg-card border border-border p-5 transition-all duration-300;
+    background: linear-gradient(135deg, hsl(220 20% 6%) 0%, hsl(220 20% 5%) 100%);
+  }
+
+  .stat-card:hover {
+    @apply border-primary/40;
+    box-shadow: 0 0 30px -10px hsl(142 70% 45% / 0.2);
+  }
+
+  .input-field {
+    @apply w-full bg-input border border-border px-4 py-3 text-sm text-foreground font-mono placeholder:text-muted-foreground/60 focus:outline-none focus:border-primary/60 transition-all duration-200 rounded-sm;
+  }
+
+  .input-field:focus {
+    box-shadow: 0 0 0 3px hsl(142 70% 45% / 0.1);
+  }
+
+  .cyber-btn {
+    --btn-default-bg: rgb(41, 41, 41);
+    --btn-padding: 15px 20px;
+    --btn-hover-bg: rgb(51, 51, 51);
+    --btn-transition: .2s;
+    --btn-letter-spacing: .1rem;
+    --btn-animation-duration: 1.2s;
+    --btn-shadow-color: rgba(0, 0, 0, 0.3);
+    --btn-shadow: 0 2px 10px 0 var(--btn-shadow-color);
+    --hover-btn-color: #00ff41;
+    --default-btn-color: #fff;
+    box-sizing: border-box;
+    padding: var(--btn-padding);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--default-btn-color);
+    font-weight: 600;
+    font-size: 16px;
+    font-family: 'JetBrains Mono', Menlo, Roboto Mono, monospace;
+    background: var(--btn-default-bg);
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all var(--btn-transition) ease-out;
+    overflow: hidden;
+    box-shadow: var(--btn-shadow);
+    position: relative;
+  }
+
+  .cyber-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0, 255, 65, 0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .cyber-btn span {
+    letter-spacing: var(--btn-letter-spacing);
+    transition: var(--btn-transition);
+    box-sizing: border-box;
+    position: relative;
+    background: inherit;
+  }
+
+  .cyber-btn span::before {
+    box-sizing: border-box;
+    position: absolute;
+    content: "";
+    background: inherit;
+  }
+
+  .cyber-btn:hover,
+  .cyber-btn:focus {
+    background: var(--btn-hover-bg);
+    border-color: var(--hover-btn-color);
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.3), 0 4px 15px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
+  }
+
+  .cyber-btn:hover::before,
+  .cyber-btn:focus::before {
+    opacity: 1;
+  }
+
+  .cyber-btn:hover span,
+  .cyber-btn:focus span {
+    color: var(--hover-btn-color);
+    text-shadow: 0 0 10px var(--hover-btn-color);
+  }
+
+  .cyber-btn:hover svg,
+  .cyber-btn:focus svg {
+    color: var(--hover-btn-color);
+    filter: drop-shadow(0 0 5px var(--hover-btn-color));
+  }
+
+  .cyber-btn:hover span::before,
+  .cyber-btn:focus span::before {
+    animation: chitchat linear both var(--btn-animation-duration);
+  }
+
+  .cyber-btn:active,
+  .cyber-btn-active {
+    transform: translateY(1px) scale(0.98);
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.5), inset 0 0 15px rgba(0, 255, 65, 0.1);
+  }
+
+  .cyber-btn-success {
+    background: rgba(0, 255, 65, 0.15) !important;
+    border-color: #00ff41 !important;
+  }
+
+  .cyber-btn-success span,
+  .cyber-btn-success svg {
+    color: #00ff41 !important;
+  }
+
+  .cyber-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .cyber-btn:disabled:hover {
+    transform: none;
+    box-shadow: var(--btn-shadow);
+    border-color: transparent;
+  }
+
+  .cyber-btn-sm {
+    --btn-padding: 10px 16px;
+    --hover-btn-color: #00ff41;
+    font-size: 13px;
+  }
+
+  .cyber-btn-primary {
+    --btn-default-bg: rgb(41, 41, 41);
+    --hover-btn-color: #00ff41;
+  }
+
+  .cyber-btn-secondary {
+    --btn-default-bg: rgb(41, 41, 41);
+    --hover-btn-color: #00ff41;
+  }
+
+  .cyber-btn-outline {
+    --btn-default-bg: transparent;
+    --hover-btn-color: #00ff41;
+    border: 2px solid hsl(var(--border));
+  }
+
+  .cyber-btn-outline:hover {
+    background: rgba(0, 255, 65, 0.05);
+  }
+
+  @keyframes chitchat {
+    0% { content: "#"; }
+    5% { content: "."; }
+    10% { content: "^{"; }
+    15% { content: "-!"; }
+    20% { content: "#$_"; }
+    25% { content: "№:0"; }
+    30% { content: "#{+."; }
+    35% { content: "@}-?"; }
+    40% { content: "?{4@%"; }
+    45% { content: "=.,^!"; }
+    50% { content: "?2@%"; }
+    55% { content: "\\;1}]"; }
+    60% { content: "?{%:%"; right: 0; }
+    65% { content: "|{f[4"; right: 0; }
+    70% { content: "{4%0%"; right: 0; }
+    75% { content: "'1_0<"; right: 0; }
+    80% { content: "{0%"; right: 0; }
+    85% { content: "]>'"; right: 0; }
+    90% { content: "4"; right: 0; }
+    95% { content: "2"; right: 0; }
+    100% { content: ""; right: 0; }
+  }
+
+  .data-table {
+    @apply w-full text-sm;
+  }
+
+  .data-table th {
+    @apply px-4 py-3 text-left font-medium text-muted-foreground text-xs uppercase tracking-wider border-b border-border bg-muted/30;
+  }
+
+  .data-table td {
+    @apply px-4 py-3 border-b border-border/50;
+  }
+
+  .data-table tr:hover td {
+    @apply bg-muted/20;
+  }
+
+  .data-table tr:last-child td {
+    @apply border-b-0;
+  }
+
+  .metric-value {
+    @apply text-2xl sm:text-3xl font-bold text-primary font-mono tracking-tight;
+    word-break: break-word;
+  }
+
+  .metric-label {
+    @apply text-xs text-muted-foreground uppercase tracking-wider font-medium mb-1;
+  }
+
+  .glow-text {
+    text-shadow: 0 0 30px hsl(142 70% 45% / 0.4), 0 0 60px hsl(142 70% 45% / 0.2);
+  }
+
+  .hero-title {
+    perspective: 500px;
+  }
+
+  .hero-title-text {
+    display: inline-block;
+    position: relative;
+    color: transparent;
+    background: linear-gradient(180deg, #ffffff 0%, #a0a0a0 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    text-shadow: 
+      0 1px 0 #ccc,
+      0 2px 0 #c9c9c9,
+      0 3px 0 #bbb,
+      0 4px 0 #b9b9b9,
+      0 5px 0 #aaa,
+      0 6px 1px rgba(0,0,0,.1),
+      0 0 5px rgba(0,0,0,.1),
+      0 1px 3px rgba(0,0,0,.3),
+      0 3px 5px rgba(0,0,0,.2),
+      0 5px 10px rgba(0,0,0,.25),
+      0 10px 10px rgba(0,0,0,.2),
+      0 20px 20px rgba(0,0,0,.15);
+    animation: hero-glow 3s ease-in-out infinite;
+  }
+
+  .hero-title-text::before {
+    content: "ARC RAIDERS";
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: linear-gradient(90deg, #00ff41, #9d4edd, #00ff41);
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-stroke: 2px transparent;
+    animation: border-flow 4s linear infinite;
+    z-index: -1;
+    filter: blur(0px);
+  }
+
+  .hero-title-text::after {
+    content: "ARC RAIDERS";
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: transparent;
+    -webkit-text-stroke: 1px #00ff41;
+    color: transparent;
+    animation: border-pulse 2s ease-in-out infinite;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  @keyframes hero-glow {
+    0%, 100% {
+      filter: drop-shadow(0 0 10px rgba(0, 255, 65, 0.3));
+    }
+    50% {
+      filter: drop-shadow(0 0 25px rgba(0, 255, 65, 0.6)) drop-shadow(0 0 50px rgba(157, 78, 221, 0.3));
+    }
+  }
+
+  @keyframes border-flow {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 200% 50%;
+    }
+  }
+
+  @keyframes border-pulse {
+    0%, 100% {
+      opacity: 0.5;
+      -webkit-text-stroke: 1px rgba(0, 255, 65, 0.5);
+    }
+    50% {
+      opacity: 1;
+      -webkit-text-stroke: 2px rgba(0, 255, 65, 1);
+    }
+  }
+
+  .hero-title-sm {
+    perspective: 300px;
+  }
+
+  .hero-title-text-sm {
+    display: inline-block;
+    position: relative;
+    color: transparent;
+    background: linear-gradient(180deg, #ffffff 0%, #a0a0a0 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    text-shadow: 
+      0 1px 0 #bbb,
+      0 2px 0 #aaa,
+      0 3px 2px rgba(0,0,0,.2),
+      0 4px 4px rgba(0,0,0,.15);
+    animation: hero-glow-sm 3s ease-in-out infinite;
+  }
+
+  .hero-title-text-sm::after {
+    content: "ARC RAIDERS";
+    position: absolute;
+    left: 0;
+    top: 0;
+    -webkit-text-stroke: 0.5px #00ff41;
+    color: transparent;
+    animation: border-pulse-sm 2s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes hero-glow-sm {
+    0%, 100% {
+      filter: drop-shadow(0 0 3px rgba(0, 255, 65, 0.2));
+    }
+    50% {
+      filter: drop-shadow(0 0 8px rgba(0, 255, 65, 0.5));
+    }
+  }
+
+  @keyframes border-pulse-sm {
+    0%, 100% {
+      opacity: 0.4;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  .rain-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    --c: #09f;
+    background-color: #000;
+    background-image: 
+      radial-gradient(4px 100px at 0px 235px, var(--c), #0000),
+      radial-gradient(4px 100px at 300px 235px, var(--c), #0000),
+      radial-gradient(1.5px 1.5px at 150px 117.5px, var(--c) 100%, #0000 150%),
+      radial-gradient(4px 100px at 0px 252px, var(--c), #0000),
+      radial-gradient(4px 100px at 300px 252px, var(--c), #0000),
+      radial-gradient(1.5px 1.5px at 150px 126px, var(--c) 100%, #0000 150%),
+      radial-gradient(4px 100px at 0px 150px, var(--c), #0000),
+      radial-gradient(4px 100px at 300px 150px, var(--c), #0000),
+      radial-gradient(1.5px 1.5px at 150px 75px, var(--c) 100%, #0000 150%),
+      radial-gradient(4px 100px at 0px 253px, var(--c), #0000),
+      radial-gradient(4px 100px at 300px 253px, var(--c), #0000),
+      radial-gradient(1.5px 1.5px at 150px 126.5px, var(--c) 100%, #0000 150%),
+      radial-gradient(4px 100px at 0px 204px, var(--c), #0000),
+      radial-gradient(4px 100px at 300px 204px, var(--c), #0000),
+      radial-gradient(1.5px 1.5px at 150px 102px, var(--c) 100%, #0000 150%),
+      radial-gradient(4px 100px at 0px 134px, var(--c), #0000),
+      radial-gradient(4px 100px at 300px 134px, var(--c), #0000),
+      radial-gradient(1.5px 1.5px at 150px 67px, var(--c) 100%, #0000 150%),
+      radial-gradient(4px 100px at 0px 179px, var(--c), #0000),
+      radial-gradient(4px 100px at 300px 179px, var(--c), #0000),
+      radial-gradient(1.5px 1.5px at 150px 89.5px, var(--c) 100%, #0000 150%),
+      radial-gradient(4px 100px at 0px 299px, var(--c), #0000),
+      radial-gradient(4px 100px at 300px 299px, var(--c), #0000),
+      radial-gradient(1.5px 1.5px at 150px 149.5px, var(--c) 100%, #0000 150%),
+      radial-gradient(4px 100px at 0px 215px, var(--c), #0000),
+      radial-gradient(4px 100px at 300px 215px, var(--c), #0000),
+      radial-gradient(1.5px 1.5px at 150px 107.5px, var(--c) 100%, #0000 150%),
+      radial-gradient(4px 100px at 0px 281px, var(--c), #0000),
+      radial-gradient(4px 100px at 300px 281px, var(--c), #0000),
+      radial-gradient(1.5px 1.5px at 150px 140.5px, var(--c) 100%, #0000 150%),
+      radial-gradient(4px 100px at 0px 158px, var(--c), #0000),
+      radial-gradient(4px 100px at 300px 158px, var(--c), #0000),
+      radial-gradient(1.5px 1.5px at 150px 79px, var(--c) 100%, #0000 150%),
+      radial-gradient(4px 100px at 0px 210px, var(--c), #0000),
+      radial-gradient(4px 100px at 300px 210px, var(--c), #0000),
+      radial-gradient(1.5px 1.5px at 150px 105px, var(--c) 100%, #0000 150%);
+    background-size:
+      300px 235px, 300px 235px, 300px 235px,
+      300px 252px, 300px 252px, 300px 252px,
+      300px 150px, 300px 150px, 300px 150px,
+      300px 253px, 300px 253px, 300px 253px,
+      300px 204px, 300px 204px, 300px 204px,
+      300px 134px, 300px 134px, 300px 134px,
+      300px 179px, 300px 179px, 300px 179px,
+      300px 299px, 300px 299px, 300px 299px,
+      300px 215px, 300px 215px, 300px 215px,
+      300px 281px, 300px 281px, 300px 281px,
+      300px 158px, 300px 158px, 300px 158px,
+      300px 210px, 300px 210px, 300px 210px;
+    animation: rain 150s linear infinite;
+  }
+
+  .rain-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background-image: radial-gradient(
+      circle at 50% 50%,
+      #0000 0,
+      #0000 2px,
+      hsl(0 0% 4%) 2px
+    );
+    background-size: 8px 8px;
+    --f: blur(1em) brightness(6);
+    animation: hue-shift 10s linear infinite;
+  }
+
+  @keyframes hue-shift {
+    0% {
+      backdrop-filter: var(--f) hue-rotate(0deg);
+    }
+    100% {
+      backdrop-filter: var(--f) hue-rotate(360deg);
+    }
+  }
+
+  @keyframes rain {
+    0% {
+      background-position:
+        0px 220px, 3px 220px, 151.5px 337.5px,
+        25px 24px, 28px 24px, 176.5px 150px,
+        50px 16px, 53px 16px, 201.5px 91px,
+        75px 224px, 78px 224px, 226.5px 350.5px,
+        100px 19px, 103px 19px, 251.5px 121px,
+        125px 120px, 128px 120px, 276.5px 187px,
+        150px 31px, 153px 31px, 301.5px 120.5px,
+        175px 235px, 178px 235px, 326.5px 384.5px,
+        200px 121px, 203px 121px, 351.5px 228.5px,
+        225px 224px, 228px 224px, 376.5px 364.5px,
+        250px 26px, 253px 26px, 401.5px 105px,
+        275px 75px, 278px 75px, 426.5px 180px;
+    }
+    100% {
+      background-position:
+        0px 6800px, 3px 6800px, 151.5px 6917.5px,
+        25px 13632px, 28px 13632px, 176.5px 13758px,
+        50px 5416px, 53px 5416px, 201.5px 5491px,
+        75px 17175px, 78px 17175px, 226.5px 17301.5px,
+        100px 5119px, 103px 5119px, 251.5px 5221px,
+        125px 8428px, 128px 8428px, 276.5px 8495px,
+        150px 9876px, 153px 9876px, 301.5px 9965.5px,
+        175px 13391px, 178px 13391px, 326.5px 13540.5px,
+        200px 14741px, 203px 14741px, 351.5px 14848.5px,
+        225px 18770px, 228px 18770px, 376.5px 18910.5px,
+        250px 5082px, 253px 5082px, 401.5px 5161px,
+        275px 6375px, 278px 6375px, 426.5px 6480px;
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .section-divider {
+    @apply h-px bg-gradient-to-r from-transparent via-border to-transparent;
+  }
+}
